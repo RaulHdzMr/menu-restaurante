@@ -1,0 +1,48 @@
+.App {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.filters {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; /* Fixes item stretching */
+  gap: 20px;
+  padding: 20px;
+  min-height: 60vh; /* Prevents content jump on filter */
+}
+
+.menu-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.menu-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.menu-item h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
