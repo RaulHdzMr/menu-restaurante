@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { 
+  Container, 
+  Typography, 
+  TextField, 
+  Select, 
+  MenuItem, 
+  FormControl, 
+  InputLabel, 
+  Box, 
+  CircularProgress,
+  Alert,
+  InputAdornment
+} from '@mui/material';
+import { Search } from '@mui/icons-material';
 import MenuList from '../components/MenuList';
- 
 
 const MealsPage = () => {
-  
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -12,20 +24,18 @@ const MealsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        
         const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
         if (!response.ok) {
           throw new Error('Error al cargar la API de comidas.');
         }
         const data = await response.json();
-        [cite_start]
+
         const normalizedData = (data.meals || []).map(meal => ({
           id: meal.idMeal,
-          name: meal.strMeal,
+          name: meal.strMeal.charAt(0).toUpperCase() + meal.strMeal.slice(1),
           category: meal.strCategory,
           thumb: meal.strMealThumb,
           price: (Math.random() * 20 + 5).toFixed(2),
@@ -43,7 +53,6 @@ const MealsPage = () => {
     fetchMeals();
   }, []);
 
-  
   useEffect(() => {
     let currentItems = [...items];
     if (searchTerm) {
@@ -57,38 +66,72 @@ const MealsPage = () => {
     setFilteredItems(currentItems);
   }, [searchTerm, selectedCategory, items]);
 
-  
   if (isLoading) {
-    return <p>Cargando platos...</p>;
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <CircularProgress size={60} sx={{ color: '#ff6b35' }} />
+      </Box>
+    );
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>Error: {error}</p>;
+    return (
+      <Container maxWidth="lg" sx={{ mt: 4 }}>
+        <Alert severity="error">Error: {error}</Alert>
+      </Container>
+    );
   }
 
- 
   return (
-    <div>
-      <h2>🍽️ Menú del Restaurante</h2>
-      <div className="filters" style={{ marginBottom: '20px' }}>
-        <input
-          type="text"
+    <Container maxWidth="lg">
+      <Typography 
+        variant="h3" 
+        component="h2" 
+        align="center" 
+        sx={{ 
+          mb: 4,
+          background: 'linear-gradient(135deg, #ff6b35 0%, #ff9800 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          fontWeight: 700,
+        }}
+      >
+        🍽️ Menú del Restaurante
+      </Typography>
+      
+      <Box sx={{ display: 'flex', gap: 2, mb: 4, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <TextField
           placeholder="Buscar por nombre..."
           value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          style={{ padding: '8px', marginRight: '10px' }}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          sx={{ minWidth: 300 }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search sx={{ color: '#ff6b35' }} />
+              </InputAdornment>
+            ),
+          }}
         />
-        <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} style={{ padding: '8px' }}>
-          {categories.map(category => (
-            <option key={category} value={category}>
-              {category === 'all' ? 'Todas las categorías' : category}
-            </option>
-          ))}
-        </select>
-      </div>
+        
+        <FormControl sx={{ minWidth: 250 }}>
+          <InputLabel>Categoría</InputLabel>
+          <Select
+            value={selectedCategory}
+            label="Categoría"
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map(category => (
+              <MenuItem key={category} value={category}>
+                {category === 'all' ? 'Todas las categorías' : category}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Box>
       
-      <MenuList items={filteredItems} /> 
-    </div>
+      <MenuList items={filteredItems} />
+    </Container>
   );
 };
 

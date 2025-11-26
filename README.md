@@ -1,38 +1,62 @@
-# Menú de Restaurante con React
+# Menú de Restaurante
 
-Esta es una aplicación de una sola página (SPA) creada con React y Vite que muestra el menú de un restaurante.
+¡Hola! Este es mi proyecto de menú de restaurante. Es una aplicación web de una sola página (SPA) que muestra una lista de platos deliciosos, organizados por categorías, con un diseño moderno y oscuro.
 
-## Captura de pantalla
+![Captura de pantalla del menú principal](captura_menu.png)
 
-![Captura de pantalla de la aplicación](captura_menu.png)
+## ¿Qué hace este proyecto?
 
-## Descripción de la tarea
+Esta aplicación te permite:
+- **Ver un menú completo**: Muestra fotos y nombres de platos traídos desde una API externa.
+- **Buscar platos**: Puedes escribir el nombre de una comida en el buscador para encontrarla rápidamente.
+- **Filtrar por categoría**: Puedes seleccionar categorías específicas (como "Seafood", "Dessert", etc.) para ver solo esos platos.
+- **Ver detalles**: Si haces clic en "Ver Receta" en un plato, verás sus instrucciones de preparación, categoría y área de origen.
+- **Explorar Categorías**: Una página dedicada para ver todas las categorías de comida disponibles.
+- **Conocernos**: Una página "Sobre Nosotros" que cuenta nuestra historia y misión.
 
-El objetivo de este proyecto es construir una aplicación de menú de restaurante para practicar los fundamentos de React, incluyendo:
+## Tecnologías que usé
 
-*   **Componentes funcionales:** La aplicación está estructurada en varios componentes (`App`, `MenuList`, `MenuItem`).
-*   **Manejo de estado:** Se utiliza `useState` para gestionar el estado de los platos, la carga y los errores.
-*   **Efectos secundarios:** Se utiliza `useEffect` para realizar una llamada a una API externa (`TheMealDB`) y cargar los datos de los platos cuando el componente `App` se monta.
-*   **Renderizado condicional:** La interfaz de usuario muestra un mensaje de "Cargando..." mientras se obtienen los datos y un mensaje de error si la llamada a la API falla.
-*   **Props:** Los datos de los platos se pasan de componentes padres a hijos a través de props.
-*   **Estilización básica:** Se ha aplicado CSS para crear un diseño de cuadrícula simple y responsivo para los elementos del menú.
-*   **Extras:** Se han implementado un buscador por nombre y un filtro por categoría para mejorar la usabilidad de la aplicación.
+Para crear este proyecto, utilicé varias herramientas y bibliotecas modernas de desarrollo web:
 
-## Dependencias instaladas
+*   **React**: La biblioteca principal de JavaScript para construir la interfaz de usuario.
+*   **Vite**: Una herramienta de construcción rápida para proyectos web modernos.
+*   **Material UI (MUI)**: Una biblioteca de componentes de diseño que utilicé para los botones, tarjetas, inputs y la estructura general, dándole un aspecto profesional.
+*   **React Router**: Para manejar la navegación entre las diferentes páginas (Inicio, Menú, Categorías, Detalles) sin recargar el navegador.
+*   **TheMealDB API**: Una API pública gratuita de donde obtengo toda la información e imágenes de las comidas.
 
-Este proyecto se creó utilizando Vite con la plantilla de React. Las dependencias principales son:
+## Características Especiales
 
-*   `react`
-*   `react-dom`
+*   **Tema Oscuro**: He configurado un tema visual oscuro con acentos en color naranja (`#ff6b35`) para darle un toque elegante y moderno.
+*   **Diseño Responsivo**: La aplicación se adapta a diferentes tamaños de pantalla gracias a los componentes de Material UI.
 
-No se han instalado dependencias adicionales más allá de las que vienen con la plantilla estándar de Vite para React.
+## Estructura del Proyecto
 
-Para instalar las dependencias, ejecuta:
-```bash
-npm install
-```
+El código está organizado de la siguiente manera en la carpeta `src`:
 
-Para iniciar el servidor de desarrollo, ejecuta:
-```bash
-npm run dev
-```
+*   `components/`: Contiene todas las páginas y piezas de la interfaz.
+    *   `Layout.jsx`: La estructura principal que incluye la barra de navegación superior.
+    *   `MealsPage.jsx`: La página principal donde se busca y filtra el menú.
+    *   `MealDetailsPage.jsx`: Muestra la información detallada de un plato específico.
+    *   `CategoriesPage.jsx` y `CategoryPage.jsx`: Para navegar por tipos de comida.
+    *   `AboutPage.jsx`: Información sobre el restaurante.
+*   `main.jsx`: El punto de entrada de la aplicación donde configuro el enrutador y el tema.
+*   `theme.js`: Archivo de configuración donde definí la paleta de colores personalizada.
+
+## Cómo instalar y ejecutar
+
+Si quieres probar este proyecto en tu computadora, sigue estos pasos:
+
+1.  **Instalar las dependencias**:
+    Abre la terminal en la carpeta del proyecto y ejecuta:
+    ```bash
+    npm install
+    ```
+
+2.  **Iniciar el servidor de desarrollo**:
+    Una vez instaladas las dependencias, ejecuta:
+    ```bash
+    npm run dev
+    ```
+    Esto iniciará el servidor y te mostrará una dirección (normalmente `http://localhost:5173`) para abrir en tu navegador.
+
+¡Espero que disfrutes explorando el menú!
